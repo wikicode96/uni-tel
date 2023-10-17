@@ -19,8 +19,8 @@ public class Flight implements Serializable {
     @Column(name = "id_airline")
     private int idAirline;
 
-    @Column(name = "from")
-    private String from;
+    @Column(name = "origin")
+    private String origin;
 
     @Column(name = "destination")
     private String destination;
@@ -31,10 +31,10 @@ public class Flight implements Serializable {
     public Flight() {
     }
 
-    public Flight(int id, int idAirline, String from, String destination, Date depart) {
+    public Flight(int id, int idAirline, String origin, String destination, Date depart) {
         this.id = id;
         this.idAirline = idAirline;
-        this.from = from;
+        this.origin = origin;
         this.destination = destination;
         this.depart = depart;
     }
@@ -44,12 +44,12 @@ public class Flight implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Flight flight = (Flight) o;
-        return id == flight.id && idAirline == flight.idAirline && Objects.equals(from, flight.from) && Objects.equals(destination, flight.destination) && Objects.equals(depart, flight.depart);
+        return id == flight.id && idAirline == flight.idAirline && Objects.equals(origin, flight.origin) && Objects.equals(destination, flight.destination) && Objects.equals(depart, flight.depart);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, idAirline, from, destination, depart);
+        return Objects.hash(id, idAirline, origin, destination, depart);
     }
 
     public int getId() {
@@ -68,12 +68,12 @@ public class Flight implements Serializable {
         this.idAirline = idAirline;
     }
 
-    public String getFrom() {
-        return from;
+    public String getOrigin() {
+        return origin;
     }
 
-    public void setFrom(String from) {
-        this.from = from;
+    public void setOrigin(String origin) {
+        this.origin = origin;
     }
 
     public String getDestination() {
