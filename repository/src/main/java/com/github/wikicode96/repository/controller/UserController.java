@@ -37,6 +37,6 @@ public class UserController {
 
     @DeleteMapping(value = "user", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     User deleteUser(User user){
-        return service.updateUser(user);
+        return service.deleteUser(user);
     }
 }

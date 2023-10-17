@@ -37,6 +37,6 @@ public class AirlineController {
 
     @DeleteMapping(value = "airline", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     Airline deleteAirline(Airline airline){
-        return service.updateAirline(airline);
+        return service.deleteAirline(airline);
     }
 }

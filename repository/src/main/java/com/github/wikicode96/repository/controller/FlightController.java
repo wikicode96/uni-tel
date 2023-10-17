@@ -37,6 +37,6 @@ public class FlightController {
 
     @DeleteMapping(value = "flight", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     Flight deleteFlight(Flight flight){
-        return service.updateFlight(flight);
+        return service.deleteFlight(flight);
     }
 }

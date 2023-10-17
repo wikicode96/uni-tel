@@ -37,6 +37,6 @@ public class BookingController {
 
     @DeleteMapping(value = "booking", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     Booking deleteBooking(Booking booking){
-        return service.updateBooking(booking);
+        return service.deleteBooking(booking);
     }
 }
