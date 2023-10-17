@@ -16,7 +16,7 @@ public class BookingController {
 
     // CRUD
     @PostMapping(value = "booking", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    Booking newBooking(Booking booking){
+    Booking newBooking(@RequestBody Booking booking){
         return service.newBooking(booking);
     }
 
@@ -31,12 +31,12 @@ public class BookingController {
     }
 
     @PutMapping(value = "booking", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    Booking updateBooking(Booking booking){
+    Booking updateBooking(@RequestBody Booking booking){
         return service.updateBooking(booking);
     }
 
     @DeleteMapping(value = "booking", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    Booking deleteBooking(Booking booking){
+    Booking deleteBooking(@RequestBody Booking booking){
         return service.deleteBooking(booking);
     }
 }

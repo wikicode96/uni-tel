@@ -16,7 +16,7 @@ public class UserController {
 
     // CRUD
     @PostMapping(value = "user", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    User newUser(User user){
+    User newUser(@RequestBody User user){
         return service.newUser(user);
     }
 
@@ -31,12 +31,12 @@ public class UserController {
     }
 
     @PutMapping(value = "user", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    User updateUser(User user){
+    User updateUser(@RequestBody User user){
         return service.updateUser(user);
     }
 
     @DeleteMapping(value = "user", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    User deleteUser(User user){
+    User deleteUser(@RequestBody User user){
         return service.deleteUser(user);
     }
 }

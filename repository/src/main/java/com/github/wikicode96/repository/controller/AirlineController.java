@@ -16,7 +16,7 @@ public class AirlineController {
 
     // CRUD
     @PostMapping(value = "airline", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    Airline newAirline(Airline airline){
+    Airline newAirline(@RequestBody Airline airline){
         return service.newAirline(airline);
     }
 
@@ -31,12 +31,12 @@ public class AirlineController {
     }
 
     @PutMapping(value = "airline", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    Airline updateAirline(Airline airline){
+    Airline updateAirline(@RequestBody Airline airline){
         return service.updateAirline(airline);
     }
 
     @DeleteMapping(value = "airline", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    Airline deleteAirline(Airline airline){
+    Airline deleteAirline(@RequestBody Airline airline){
         return service.deleteAirline(airline);
     }
 }
