@@ -15,8 +15,8 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "name", nullable = false)
-    private String name;
+    @Column(name = "first_name", nullable = false)
+    private String firstName;
 
     @Column(name = "last_name", nullable = false)
     private String lastName;
@@ -30,9 +30,9 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(int id, String name, String lastName, String email, String password) {
+    public User(int id, String firstName, String lastName, String email, String password) {
         this.id = id;
-        this.name = name;
+        this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
@@ -43,12 +43,12 @@ public class User implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id == user.id && Objects.equals(name, user.name) && Objects.equals(lastName, user.lastName) && Objects.equals(email, user.email) && Objects.equals(password, user.password);
+        return id == user.id && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(email, user.email) && Objects.equals(password, user.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, lastName, email, password);
+        return Objects.hash(id, firstName, lastName, email, password);
     }
 
     public int getId() {
@@ -59,12 +59,12 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {
