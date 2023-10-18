@@ -6,8 +6,6 @@ for managing data, as flights, airlines, bookings, users.
 - [Getting Started](#getting-started)
 - [Endpoints](#endpoints)
 - [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Getting Started
 To run this microservice, follow these steps:
