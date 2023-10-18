@@ -51,8 +51,12 @@ public class FlightServiceImpl implements FlightService{
     public Flight updateFlight(Flight flight) {
 
         if(flight.getId() > 0) {
-            repository.save(flight);
-            return flight;
+            try{
+                repository.save(flight);
+                return flight;
+            }catch (Exception e){
+                return null;
+            }
         }else{
             return null;
         }
@@ -62,8 +66,12 @@ public class FlightServiceImpl implements FlightService{
     public Flight deleteFlight(Flight flight) {
 
         if(flight.getId() > 0) {
-            repository.delete(flight);
-            return flight;
+            try{
+                repository.delete(flight);
+                return flight;
+            }catch (Exception e){
+                return null;
+            }
         }else{
             return null;
         }

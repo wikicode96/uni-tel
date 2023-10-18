@@ -3,7 +3,9 @@ package com.github.wikicode96.repository.controller;
 import com.github.wikicode96.repository.entity.Flight;
 import com.github.wikicode96.repository.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,27 +18,42 @@ public class FlightController {
 
     // CRUD
     @PostMapping(value = "flight", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    Flight newFlight(@RequestBody Flight flight){
-        return service.newFlight(flight);
+    ResponseEntity<Flight> newFlight(@RequestBody Flight flight){
+        Flight response = service.newFlight(flight);
+
+        if (response != null) return ResponseEntity.ok(response);
+        else return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
     }
 
     @GetMapping(value = "flight/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    Flight getFlightById(@PathVariable("id") int id){
-        return service.getFlightById(id);
+    ResponseEntity<Flight> getFlightById(@PathVariable("id") int id){
+        Flight response = service.getFlightById(id);
+
+        if (response != null) return ResponseEntity.ok(response);
+        else return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
     }
 
     @GetMapping(value = "flights", produces = MediaType.APPLICATION_JSON_VALUE)
-    List<Flight> getAllFlights(){
-        return service.getAllFlights();
+    ResponseEntity<List<Flight>> getAllFlights(){
+        List<Flight> response = service.getAllFlights();
+
+        if (!response.isEmpty()) return ResponseEntity.ok(response);
+        else return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
     }
 
     @PutMapping(value = "flight", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    Flight updateFlight(@RequestBody Flight flight){
-        return service.updateFlight(flight);
+    ResponseEntity<Flight> updateFlight(@RequestBody Flight flight){
+        Flight response =  service.updateFlight(flight);
+
+        if (response != null) return ResponseEntity.ok(response);
+        else return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
     }
 
     @DeleteMapping(value = "flight", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    Flight deleteFlight(@RequestBody Flight flight){
-        return service.deleteFlight(flight);
+    ResponseEntity<Flight> deleteFlight(@RequestBody Flight flight){
+        Flight response =  service.deleteFlight(flight);
+
+        if (response != null) return ResponseEntity.ok(response);
+        else return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
     }
 }

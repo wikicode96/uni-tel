@@ -51,8 +51,12 @@ public class UserServiceImpl implements UserService{
     public User updateUser(User user) {
 
         if(user.getId() > 0) {
-            repository.save(user);
-            return user;
+            try{
+                repository.save(user);
+                return user;
+            }catch (Exception e){
+                return null;
+            }
         }else{
             return null;
         }
@@ -62,8 +66,12 @@ public class UserServiceImpl implements UserService{
     public User deleteUser(User user) {
 
         if(user.getId() > 0) {
-            repository.delete(user);
-            return user;
+            try{
+                repository.delete(user);
+                return user;
+            }catch (Exception e){
+                return null;
+            }
         }else{
             return null;
         }

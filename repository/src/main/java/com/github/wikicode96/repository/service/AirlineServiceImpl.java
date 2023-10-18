@@ -51,8 +51,12 @@ public class AirlineServiceImpl implements AirlineService{
     public Airline updateAirline(Airline airline) {
 
         if(airline.getId() > 0) {
-            repository.save(airline);
-            return airline;
+            try{
+                repository.save(airline);
+                return airline;
+            }catch (Exception e){
+                return null;
+            }
         }else{
             return null;
         }
@@ -62,8 +66,12 @@ public class AirlineServiceImpl implements AirlineService{
     public Airline deleteAirline(Airline airline) {
 
         if(airline.getId() > 0) {
-            repository.delete(airline);
-            return airline;
+            try{
+                repository.delete(airline);
+                return airline;
+            }catch (Exception e){
+                return null;
+            }
         }else{
             return null;
         }

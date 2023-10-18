@@ -51,8 +51,12 @@ public class BookingServiceImpl implements BookingService{
     public Booking updateBooking(Booking booking) {
 
         if(booking.getId() > 0) {
-            repository.save(booking);
-            return booking;
+            try{
+                repository.save(booking);
+                return booking;
+            }catch (Exception e){
+                return null;
+            }
         }else{
             return null;
         }
@@ -62,8 +66,12 @@ public class BookingServiceImpl implements BookingService{
     public Booking deleteBooking(Booking booking) {
 
         if(booking.getId() > 0) {
-            repository.delete(booking);
-            return booking;
+            try{
+                repository.delete(booking);
+                return booking;
+            }catch (Exception e){
+                return null;
+            }
         }else{
             return null;
         }
