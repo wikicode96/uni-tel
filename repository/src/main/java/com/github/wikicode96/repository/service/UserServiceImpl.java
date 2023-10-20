@@ -31,13 +31,17 @@ public class UserServiceImpl implements UserService{
     @Override
     public User getUserById(int id) {
 
-        try{
-            User user = repository.findById(id).orElse(null);
+        if(id > 0) {
+            try {
+                User user = repository.findById(id).orElse(null);
 
-            if (user != null) return user;
-            else return null;
+                if (user != null) return user;
+                else return null;
 
-        }catch (Exception e){
+            } catch (Exception e) {
+                return null;
+            }
+        } else {
             return null;
         }
     }

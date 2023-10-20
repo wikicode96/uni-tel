@@ -31,13 +31,17 @@ public class BookingServiceImpl implements BookingService{
     @Override
     public Booking getBookingById(int id) {
 
-        try{
-            Booking booking = repository.findById(id).orElse(null);
+        if(id > 0){
+            try{
+                Booking booking = repository.findById(id).orElse(null);
 
-            if (booking != null) return booking;
-            else return null;
+                if (booking != null) return booking;
+                else return null;
 
-        }catch (Exception e){
+            }catch (Exception e){
+                return null;
+            }
+        } else {
             return null;
         }
     }

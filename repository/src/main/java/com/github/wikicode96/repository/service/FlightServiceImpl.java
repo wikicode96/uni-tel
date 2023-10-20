@@ -31,13 +31,17 @@ public class FlightServiceImpl implements FlightService{
     @Override
     public Flight getFlightById(int id) {
 
-        try{
-            Flight flight = repository.findById(id).orElse(null);
+        if(id > 0){
+            try{
+                Flight flight = repository.findById(id).orElse(null);
 
-            if (flight != null) return flight;
-            else return null;
+                if (flight != null) return flight;
+                else return null;
 
-        }catch (Exception e){
+            }catch (Exception e){
+                return null;
+            }
+        } else {
             return null;
         }
     }
