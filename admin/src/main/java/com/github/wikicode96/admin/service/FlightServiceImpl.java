@@ -1,5 +1,6 @@
 package com.github.wikicode96.admin.service;
 
+import com.github.wikicode96.admin.model.Airline;
 import com.github.wikicode96.admin.model.Flight;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,14 @@ public class FlightServiceImpl implements FlightService {
 
     @Override
     public Flight[] getAllFlights() {
-        return restTemplate.getForObject(url + "/flights", Flight[].class);
+        Flight[] flights = restTemplate.getForObject(url + "/flights", Flight[].class);
+        Airline[] airlines = restTemplate.getForObject(url + "/airlines", Airline[].class);
+
+        for (Flight f: flights) {
+            for (Airline a: airlines) {
+                if(f.getIdAirline() == a.getId()) f.setAirline(a);
+            }
+        }
+        return flights;
     }
 }

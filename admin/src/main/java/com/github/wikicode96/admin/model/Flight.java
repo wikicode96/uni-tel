@@ -10,16 +10,9 @@ public class Flight {
     private String origin;
     private String destination;
     private Date depart;
+    private Airline airline;
 
     public Flight() {
-    }
-
-    public Flight(int id, int idAirline, String origin, String destination, Date depart) {
-        this.id = id;
-        this.idAirline = idAirline;
-        this.origin = origin;
-        this.destination = destination;
-        this.depart = depart;
     }
 
     @Override
@@ -27,12 +20,12 @@ public class Flight {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Flight flight = (Flight) o;
-        return id == flight.id && idAirline == flight.idAirline && Objects.equals(origin, flight.origin) && Objects.equals(destination, flight.destination) && Objects.equals(depart, flight.depart);
+        return id == flight.id && idAirline == flight.idAirline && Objects.equals(origin, flight.origin) && Objects.equals(destination, flight.destination) && Objects.equals(depart, flight.depart) && Objects.equals(airline, flight.airline);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, idAirline, origin, destination, depart);
+        return Objects.hash(id, idAirline, origin, destination, depart, airline);
     }
 
     public int getId() {
@@ -73,5 +66,13 @@ public class Flight {
 
     public void setDepart(Date depart) {
         this.depart = depart;
+    }
+
+    public Airline getAirline() {
+        return airline;
+    }
+
+    public void setAirline(Airline airline) {
+        this.airline = airline;
     }
 }

@@ -126,8 +126,8 @@
 							<tbody>
 								<tr th:each="flight : ${flights}">
 									<td th:text="${flight.id}"></td>
-									<td>TODO</td>
-									<td>TODO</td>
+									<td><img width="40rem" height="40rem" th:src="@{/img/{logo}.png(logo=${flight.airline.imgLogo})}" alt="logo"></td>
+									<td th:text="${flight.airline.name}"></td>
 									<td th:text="${flight.origin}"></td>
 									<td th:text="${flight.destination}"></td>
 									<td th:text="${flight.depart}"></td>

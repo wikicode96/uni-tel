@@ -1,6 +1,8 @@
 package com.github.wikicode96.admin.model;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Booking {
@@ -9,15 +11,10 @@ public class Booking {
     private int idUser;
     private int idFlight;
     private Date date;
+    private User user;
+    private Flight flight;
 
     public Booking() {
-    }
-
-    public Booking(int id, int idUser, int idFlight, Date date) {
-        this.id = id;
-        this.idUser = idUser;
-        this.idFlight = idFlight;
-        this.date = date;
     }
 
     @Override
@@ -25,12 +22,12 @@ public class Booking {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Booking booking = (Booking) o;
-        return id == booking.id && idUser == booking.idUser && idFlight == booking.idFlight && Objects.equals(date, booking.date);
+        return id == booking.id && idUser == booking.idUser && idFlight == booking.idFlight && Objects.equals(date, booking.date) && Objects.equals(user, booking.user) && Objects.equals(flight, booking.flight);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, idUser, idFlight, date);
+        return Objects.hash(id, idUser, idFlight, date, user, flight);
     }
 
     public int getId() {
@@ -63,5 +60,21 @@ public class Booking {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Flight getFlight() {
+        return flight;
+    }
+
+    public void setFlight(Flight flight) {
+        this.flight = flight;
     }
 }

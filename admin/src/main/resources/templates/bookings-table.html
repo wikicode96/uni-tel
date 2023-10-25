@@ -115,10 +115,10 @@
 							<thead>
 								<tr>
 									<th style="width: 5%">id</th>
-									<th style="width: 10%">id_flight</th>
-									<th style="width: 15%">User name</th>
+									<th style="width: 10%">idFlight</th>
+									<th style="width: 10%">User</th>
 									<th style="width: 30%">User mail</th>
-									<th style="width: 10%">Depart</th>
+									<th style="width: 15%">Depart</th>
 									<th style="width: 30%"></th>
 								</tr>
 							</thead>
@@ -126,9 +126,9 @@
 								<tr th:each="booking : ${bookings}">
 									<td th:text="${booking.id}"></td>
 									<td th:text="${booking.idFlight}"></td>
-									<td>TODO</td>
-									<td>TODO@example.com</td>
-									<td th:text="${booking.date}"></td>
+									<td th:text="${booking.user.firstName}">TODO</td>
+									<td th:text="${booking.user.firstName}">TODO@example.com</td>
+									<td th:text="${booking.user.email}"></td>
 									<td class="project-actions text-right">
 										<a class="btn btn-primary btn-sm" href="#">
 											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
