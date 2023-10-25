@@ -1,7 +1,7 @@
 package com.github.wikicode96.admin.controller;
 
-import com.github.wikicode96.admin.model.Airline;
-import com.github.wikicode96.admin.service.AirlineService;
+import com.github.wikicode96.admin.model.Booking;
+import com.github.wikicode96.admin.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,18 +9,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/admin/airline")
-public class AirlineController {
+@RequestMapping("/admin/booking")
+public class BookingController {
 
     @Autowired
-    AirlineService service;
+    BookingService service;
 
     @GetMapping("/all")
-    String allAirlines(Model model){
+    String allBookings(Model model){
 
-        Airline[] airlines = service.getAllAirlines();
-        model.addAttribute("airlines", airlines);
+        Booking[] bookings = service.getAllBookings();
+        model.addAttribute("bookings", bookings);
 
-        return "airlines-table";
+        return "bookings-table";
     }
 }

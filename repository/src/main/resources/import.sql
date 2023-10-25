@@ -31,4 +31,5 @@ INSERT INTO flights (id_airline, destination, origin, depart) VALUES (2, 'LC', '
 INSERT INTO flights (id_airline, destination, origin, depart) VALUES (1, 'VC', 'SF', '2024-02-24');
 
 -- Bookings
-INSERT INTO bookings (id_flight, id_user, date) VALUES (1, 1, '2023-10-24');
+INSERT INTO bookings (id_flight, id_user, date) VALUES (7, 1, '2023-10-24');
+INSERT INTO bookings (id_flight, id_user, date) VALUES (5, 1, '2023-12-02');

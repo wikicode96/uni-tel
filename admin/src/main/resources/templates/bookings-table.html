@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 	<meta charset="utf-8">
@@ -14,20 +14,17 @@
 	<div class="wrapper">
 		<!-- Main Sidebar Container -->
 		<aside class="main-sidebar sidebar-dark-primary elevation-4">
-
+			<a href="#" class="brand-link">
+				<h1 class="text-light p-2">Uni-Tel</h1>
+			</a>
 			<!-- Sidebar -->
 			<div class="sidebar p-3">
-
-				<a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white">
-					<h1 class="text-light p-2">Uni-Tel</h1>
-				</a>
-
 				<!-- Sidebar Menu -->
 				<nav class="mt-2">
 					<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
 						data-accordion="false">
 						<li class="nav-item">
-							<a href="#" class="nav-link">
+							<a href="http://localhost:50001/admin/airline/all" class="nav-link">
 								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
 									class="bi bi-airplane" viewBox="0 0 16 16">
 									<path
@@ -37,7 +34,7 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="#" class="nav-link">
+							<a href="http://localhost:50001/admin/user/all" class="nav-link">
 								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
 									class="bi bi-person" viewBox="0 0 16 16">
 									<path
@@ -47,7 +44,7 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="#" class="nav-link active">
+							<a href="http://localhost:50001/admin/flight/all" class="nav-link">
 								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
 									class="bi bi-rocket-takeoff" viewBox="0 0 16 16">
 									<path
@@ -61,7 +58,7 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="#" class="nav-link">
+							<a href="http://localhost:50001/admin/booking/all" class="nav-link active">
 								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
 									class="bi bi-book" viewBox="0 0 16 16">
 									<path
@@ -75,23 +72,37 @@
 			</div>
 		</aside>
 
+		<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+			<!-- Left navbar links -->
+			<ul class="navbar-nav">
+				<a class="nav-link" data-widget="pushmenu" href="#" role="button">
+					<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+						class="bi bi-list" viewBox="0 0 16 16">
+						<path fill-rule="evenodd"
+							d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+					</svg>
+				</a>
+			</ul>
+		</nav>
+
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper" style="min-height: 1604.44px;">
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
-				<div class="container-fluid">
+				<div class="container-fluid pb-3">
 					<div class="row mb-2">
 						<div class="col-sm-6">
-							<h1>Flights</h1>
+							<h1>Bookings</h1>
 						</div>
 						<div class="col-sm-6">
 							<ol class="breadcrumb float-sm-right">
 								<li class="breadcrumb-item"><a href="#">Home</a></li>
-								<li class="breadcrumb-item active">Flights</li>
+								<li class="breadcrumb-item active">Bookings</li>
 							</ol>
 						</div>
 					</div>
-				</div><!-- /.container-fluid -->
+				</div>
+				<a href="#" class="btn btn-primary">New Booking</a>
 			</section>
 
 			<!-- Main content -->
@@ -103,48 +114,21 @@
 						<table class="table table-striped projects">
 							<thead>
 								<tr>
-									<th style="width: 5%">
-										id
-									</th>
-									<th style="width: 5%">
-										Logo
-									</th>
-									<th style="width: 15%">
-										Airline
-									</th>
-									<th style="width: 15%">
-										Origin
-									</th>
-									<th style="width: 15%">
-										Destination
-									</th>
-									<th style="width: 10%">
-										Depart
-									</th>
-									<th style="width: 30%">
-									</th>
+									<th style="width: 5%">id</th>
+									<th style="width: 10%">id_flight</th>
+									<th style="width: 15%">User name</th>
+									<th style="width: 30%">User mail</th>
+									<th style="width: 10%">Depart</th>
+									<th style="width: 30%"></th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>
-										1
-									</td>
-									<td>
-										img
-									</td>
-									<td>
-										FlyUS
-									</td>
-									<td>
-										LV
-									</td>
-									<td>
-										LS
-									</td>
-									<td>
-										2023-12-05
-									</td>
+								<tr th:each="booking : ${bookings}">
+									<td th:text="${booking.id}"></td>
+									<td th:text="${booking.idFlight}"></td>
+									<td>TODO</td>
+									<td>TODO@example.com</td>
+									<td th:text="${booking.date}"></td>
 									<td class="project-actions text-right">
 										<a class="btn btn-primary btn-sm" href="#">
 											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -177,16 +161,11 @@
 							</tbody>
 						</table>
 					</div>
-					<!-- /.card-body -->
 				</div>
-				<!-- /.card -->
-
 			</section>
-			<!-- /.content -->
 		</div>
 	</div>
 
-	<!-- REQUIRED SCRIPTS -->
 	<!-- jQuery -->
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 	<!-- Bootstrap 5 -->
@@ -194,5 +173,4 @@
 	<!-- AdminLTE App -->
 	<script src="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/js/adminlte.min.js"></script>
 </body>
-
 </html>
