@@ -23,27 +23,14 @@ public class AirlineServiceImpl implements AirlineService{
             }catch (Exception e){
                 return null;
             }
-        }else{
-            return null;
         }
+        return null;
     }
 
     @Override
     public Airline getAirlineById(int id) {
-
-        if(id > 0){
-            try{
-                Airline airline = repository.findById(id).orElse(null);
-
-                if (airline != null) return airline;
-                else return null;
-
-            }catch (Exception e){
-                return null;
-            }
-        } else {
-            return null;
-        }
+        if(id > 0) return repository.findById(id).orElse(null);
+        else return null;
     }
 
     @Override
@@ -61,9 +48,8 @@ public class AirlineServiceImpl implements AirlineService{
             }catch (Exception e){
                 return null;
             }
-        }else{
-            return null;
         }
+        return null;
     }
 
     @Override
@@ -76,8 +62,7 @@ public class AirlineServiceImpl implements AirlineService{
             }catch (Exception e){
                 return null;
             }
-        }else{
-            return null;
         }
+        return null;
     }
 }

@@ -23,27 +23,14 @@ public class UserServiceImpl implements UserService{
             }catch (Exception e){
                 return null;
             }
-        }else{
-            return null;
         }
+        return null;
     }
 
     @Override
     public User getUserById(int id) {
-
-        if(id > 0) {
-            try {
-                User user = repository.findById(id).orElse(null);
-
-                if (user != null) return user;
-                else return null;
-
-            } catch (Exception e) {
-                return null;
-            }
-        } else {
-            return null;
-        }
+        if(id > 0) return repository.findById(id).orElse(null);
+        else return null;
     }
 
     @Override
@@ -61,9 +48,8 @@ public class UserServiceImpl implements UserService{
             }catch (Exception e){
                 return null;
             }
-        }else{
-            return null;
         }
+        return null;
     }
 
     @Override
@@ -76,8 +62,7 @@ public class UserServiceImpl implements UserService{
             }catch (Exception e){
                 return null;
             }
-        }else{
-            return null;
         }
+        return null;
     }
 }
