@@ -39,6 +39,11 @@ public class BookingServiceImpl implements BookingService{
     }
 
     @Override
+    public List<Booking> getAllBookingsByUserId(int idUser) {
+        return repository.findByUserId(idUser);
+    }
+
+    @Override
     public Booking updateBooking(Booking booking) {
 
         if(booking.getId() > 0) {

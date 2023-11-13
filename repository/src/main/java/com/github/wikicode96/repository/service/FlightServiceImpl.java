@@ -39,6 +39,11 @@ public class FlightServiceImpl implements FlightService{
     }
 
     @Override
+    public List<Flight> getAllFlightsByAirlineId(int idAirline) {
+        return repository.findByAirlineId(idAirline);
+    }
+
+    @Override
     public Flight updateFlight(Flight flight) {
 
         if(flight.getId() > 0) {

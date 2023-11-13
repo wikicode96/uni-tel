@@ -1,5 +1,6 @@
 -- Users
-INSERT INTO users (first_name, last_name, email, password) VALUES ('fname', 'lname', 'example@example.com', 'example');
+INSERT INTO users (first_name, last_name, email, password) VALUES ('username1', 'username1', 'example1@example.com', 'example');
+INSERT INTO users (first_name, last_name, email, password) VALUES ('username2', 'username2', 'example2@example.com', 'example');
 
 -- Airlines
 INSERT INTO airlines (name, img_logo) VALUES ('FlyUS', 'flyus');
@@ -33,3 +34,4 @@ INSERT INTO flights (id_airline, destination, origin, depart) VALUES (1, 'VC', '
 -- Bookings
 INSERT INTO bookings (id_flight, id_user, date) VALUES (7, 1, '2023-10-24');
 INSERT INTO bookings (id_flight, id_user, date) VALUES (5, 1, '2023-12-02');
+INSERT INTO bookings (id_flight, id_user, date) VALUES (3, 2, '2023-09-12');

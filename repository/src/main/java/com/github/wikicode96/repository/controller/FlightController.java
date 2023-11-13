@@ -16,7 +16,6 @@ public class FlightController {
     @Autowired
     private FlightService service;
 
-    // CRUD
     @PostMapping(value = "flight", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<Flight> newFlight(@RequestBody Flight flight){
         Flight response = service.newFlight(flight);
@@ -36,6 +35,14 @@ public class FlightController {
     @GetMapping(value = "flights", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<List<Flight>> getAllFlights(){
         List<Flight> response = service.getAllFlights();
+
+        if (!response.isEmpty()) return ResponseEntity.ok(response);
+        else return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+    }
+
+    @GetMapping(value = "flights/airline/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<List<Flight>> getAllFlightsByAirlineId(@PathVariable("id") int idAirline){
+        List<Flight> response = service.getAllFlightsByAirlineId(idAirline);
 
         if (!response.isEmpty()) return ResponseEntity.ok(response);
         else return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);

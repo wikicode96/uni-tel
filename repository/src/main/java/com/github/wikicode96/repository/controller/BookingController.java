@@ -16,7 +16,6 @@ public class BookingController {
     @Autowired
     private BookingService service;
 
-    // CRUD
     @PostMapping(value = "booking", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<Booking> newBooking(@RequestBody Booking booking){
         Booking response = service.newBooking(booking);
@@ -36,6 +35,14 @@ public class BookingController {
     @GetMapping(value = "bookings", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<List<Booking>> getAllBookings(){
         List<Booking> response = service.getAllBookings();
+
+        if (!response.isEmpty()) return ResponseEntity.ok(response);
+        else return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+    }
+
+    @GetMapping(value = "bookings/user/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<List<Booking>> getAllBookingsByUserId(@PathVariable("id") int idUser){
+        List<Booking> response = service.getAllBookingsByUserId(idUser);
 
         if (!response.isEmpty()) return ResponseEntity.ok(response);
         else return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
