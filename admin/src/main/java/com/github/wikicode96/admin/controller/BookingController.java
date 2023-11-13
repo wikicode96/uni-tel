@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 @RequestMapping("/admin/booking")
@@ -20,7 +23,19 @@ public class BookingController {
 
         Booking[] bookings = service.getAllBookings();
         model.addAttribute("bookings", bookings);
+        model.addAttribute("booking", new Booking());
 
         return "bookings-table";
+    }
+
+    @PostMapping(value = "/delete")
+    RedirectView deleteBooking(@RequestParam("idBooking") int id){
+
+        Booking booking = new Booking();
+        booking.setId(id);
+
+        service.deleteBooking(booking);
+
+        return new RedirectView("/admin/booking/all");
     }
 }

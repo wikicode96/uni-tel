@@ -3,6 +3,10 @@ package com.github.wikicode96.admin.service;
 import com.github.wikicode96.admin.model.Airline;
 import com.github.wikicode96.admin.model.Flight;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -25,5 +29,15 @@ public class FlightServiceImpl implements FlightService {
             }
         }
         return flights;
+    }
+
+    @Override
+    public void deleteFlight(Flight flight) {
+        if(flight.getId() > 0) {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            HttpEntity<Flight> requestEntity = new HttpEntity<>(flight, headers);
+            restTemplate.exchange(url + "/flight", HttpMethod.DELETE, requestEntity, Void.class);
+        }
     }
 }
