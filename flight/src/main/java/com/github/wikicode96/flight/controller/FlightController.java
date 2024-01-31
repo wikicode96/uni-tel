@@ -41,7 +41,7 @@ public class FlightController {
     }
 
     @GetMapping(value = "flights/airline/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<List<FlightEntity>> getAllFlightsByAirlineId(@PathVariable("id") int idAirline){
+    ResponseEntity<List<FlightEntity>> getAllFlightsByAirlineId(@PathVariable("id") Long idAirline){
         List<FlightEntity> response = service.getAllFlightsByAirlineId(idAirline);
 
         if (!response.isEmpty()) return ResponseEntity.ok(response);

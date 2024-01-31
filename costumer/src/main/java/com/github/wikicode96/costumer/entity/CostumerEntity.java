@@ -6,14 +6,14 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@Table(name = "users")
+@Table(name = "costumers")
 public class CostumerEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column(name = "first_name", nullable = false)
     private String firstName;
@@ -30,7 +30,7 @@ public class CostumerEntity implements Serializable {
     public CostumerEntity() {
     }
 
-    public CostumerEntity(int id, String firstName, String lastName, String email, String password) {
+    public CostumerEntity(Long id, String firstName, String lastName, String email, String password) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -51,11 +51,11 @@ public class CostumerEntity implements Serializable {
         return Objects.hash(id, firstName, lastName, email, password);
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -8,7 +8,7 @@ public interface FlightService {
     FlightEntity newFlight(FlightEntity flight);
     FlightEntity getFlightById(int id);
     List<FlightEntity> getAllFlights();
-    List<FlightEntity> getAllFlightsByAirlineId(int idAirline);
+    List<FlightEntity> getAllFlightsByAirlineId(Long idAirline);
     FlightEntity updateFlight(FlightEntity flight);
     FlightEntity deleteFlight(FlightEntity flight);
 }

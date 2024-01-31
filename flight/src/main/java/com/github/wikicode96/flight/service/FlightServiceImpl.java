@@ -39,7 +39,7 @@ public class FlightServiceImpl implements FlightService{
     }
 
     @Override
-    public List<FlightEntity> getAllFlightsByAirlineId(int idAirline) {
+    public List<FlightEntity> getAllFlightsByAirlineId(Long idAirline) {
         return repository.findByAirlineId(idAirline);
     }
 

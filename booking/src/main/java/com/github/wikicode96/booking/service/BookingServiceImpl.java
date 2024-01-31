@@ -39,7 +39,7 @@ public class BookingServiceImpl implements BookingService{
     }
 
     @Override
-    public List<BookingEntity> getAllBookingsByUserId(int idUser) {
+    public List<BookingEntity> getAllBookingsByUserId(Long idUser) {
         return repository.findByUserId(idUser);
     }
 

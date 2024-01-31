@@ -6,14 +6,14 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@Table(name = "users")
-public class UserEntity implements Serializable {
+@Table(name = "costumers")
+public class CostumerEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column(name = "first_name", nullable = false)
     private String firstName;
@@ -27,10 +27,10 @@ public class UserEntity implements Serializable {
     @Column(name = "password", nullable = false)
     private String password;
 
-    public UserEntity() {
+    public CostumerEntity() {
     }
 
-    public UserEntity(int id, String firstName, String lastName, String email, String password) {
+    public CostumerEntity(Long id, String firstName, String lastName, String email, String password) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -42,7 +42,7 @@ public class UserEntity implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserEntity user = (UserEntity) o;
+        CostumerEntity user = (CostumerEntity) o;
         return id == user.id && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(email, user.email) && Objects.equals(password, user.password);
     }
 
@@ -51,11 +51,11 @@ public class UserEntity implements Serializable {
         return Objects.hash(id, firstName, lastName, email, password);
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -13,7 +13,7 @@ public class AirlineEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column(name = "name")
     private String name;
@@ -24,7 +24,7 @@ public class AirlineEntity implements Serializable {
     public AirlineEntity() {
     }
 
-    public AirlineEntity(int id, String name, String imgLogo) {
+    public AirlineEntity(Long id, String name, String imgLogo) {
         this.id = id;
         this.name = name;
         this.imgLogo = imgLogo;
@@ -34,8 +34,8 @@ public class AirlineEntity implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AirlineEntity airline = (AirlineEntity) o;
-        return id == airline.id && Objects.equals(name, airline.name) && Objects.equals(imgLogo, airline.imgLogo);
+        AirlineEntity entity = (AirlineEntity) o;
+        return id == entity.id && Objects.equals(name, entity.name) && Objects.equals(imgLogo, entity.imgLogo);
     }
 
     @Override
@@ -43,11 +43,11 @@ public class AirlineEntity implements Serializable {
         return Objects.hash(id, name, imgLogo);
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -41,7 +41,7 @@ public class BookingController {
     }
 
     @GetMapping(value = "bookings/user/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<List<BookingEntity>> getAllBookingsByUserId(@PathVariable("id") int idUser){
+    ResponseEntity<List<BookingEntity>> getAllBookingsByUserId(@PathVariable("id") Long idUser){
         List<BookingEntity> response = service.getAllBookingsByUserId(idUser);
 
         if (!response.isEmpty()) return ResponseEntity.ok(response);

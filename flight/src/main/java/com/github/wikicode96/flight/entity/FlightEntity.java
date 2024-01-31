@@ -14,10 +14,11 @@ public class FlightEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
-    @Column(name = "id_airline")
-    private int idAirline;
+    @ManyToOne
+    @JoinColumn(name = "id_airline", nullable = false)
+    private AirlineEntity airline;
 
     @Column(name = "origin")
     private String origin;
@@ -31,9 +32,9 @@ public class FlightEntity implements Serializable {
     public FlightEntity() {
     }
 
-    public FlightEntity(int id, int idAirline, String origin, String destination, Date depart) {
+    public FlightEntity(Long id, AirlineEntity airline, String origin, String destination, Date depart) {
         this.id = id;
-        this.idAirline = idAirline;
+        this.airline = airline;
         this.origin = origin;
         this.destination = destination;
         this.depart = depart;
@@ -44,28 +45,28 @@ public class FlightEntity implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         FlightEntity flight = (FlightEntity) o;
-        return id == flight.id && idAirline == flight.idAirline && Objects.equals(origin, flight.origin) && Objects.equals(destination, flight.destination) && Objects.equals(depart, flight.depart);
+        return id == flight.id && airline == flight.airline && Objects.equals(origin, flight.origin) && Objects.equals(destination, flight.destination) && Objects.equals(depart, flight.depart);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, idAirline, origin, destination, depart);
+        return Objects.hash(id, airline, origin, destination, depart);
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public int getIdAirline() {
-        return idAirline;
+    public AirlineEntity getAirline() {
+        return airline;
     }
 
-    public void setIdAirline(int idAirline) {
-        this.idAirline = idAirline;
+    public void setAirline(AirlineEntity idAirline) {
+        this.airline = airline;
     }
 
     public String getOrigin() {

@@ -14,13 +14,15 @@ public class BookingEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
-    @Column(name = "id_user", nullable = false)
-    private int idUser;
+    @ManyToOne
+    @JoinColumn(name = "id_costumers", nullable = false)
+    private CostumerEntity costumer;
 
-    @Column(name = "id_flight", nullable = false)
-    private int idFlight;
+    @ManyToOne
+    @JoinColumn(name = "id_flight", nullable = false)
+    private FlightEntity flight;
 
     @Column(name = "date", nullable = false)
     private Date date;
@@ -28,10 +30,10 @@ public class BookingEntity implements Serializable {
     public BookingEntity() {
     }
 
-    public BookingEntity(int id, int idUser, int idFlight, Date date) {
+    public BookingEntity(Long id, CostumerEntity costumer, FlightEntity flight, Date date) {
         this.id = id;
-        this.idUser = idUser;
-        this.idFlight = idFlight;
+        this.costumer = costumer;
+        this.flight = flight;
         this.date = date;
     }
 
@@ -40,36 +42,36 @@ public class BookingEntity implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BookingEntity booking = (BookingEntity) o;
-        return id == booking.id && idUser == booking.idUser && idFlight == booking.idFlight && Objects.equals(date, booking.date);
+        return id == booking.id && costumer == booking.costumer && flight == booking.flight && Objects.equals(date, booking.date);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, idUser, idFlight, date);
+        return Objects.hash(id, costumer, flight, date);
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public int getIdUser() {
-        return idUser;
+    public CostumerEntity getCostumer() {
+        return costumer;
     }
 
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
+    public void setCostumer(CostumerEntity costumer) {
+        this.costumer = costumer;
     }
 
-    public int getIdFlight() {
-        return idFlight;
+    public FlightEntity getFlight() {
+        return flight;
     }
 
-    public void setIdFlight(int idFlight) {
-        this.idFlight = idFlight;
+    public void setFlight(FlightEntity flight) {
+        this.flight = flight;
     }
 
     public Date getDate() {

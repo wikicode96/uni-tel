@@ -11,6 +11,6 @@ import java.util.List;
 public interface FlightRepository extends JpaRepository<FlightEntity, Integer> {
 
     // Custom method to get flights by airline id
-    @Query("SELECT f FROM FlightEntity f WHERE f.idAirline = :idAirline")
-    List<FlightEntity> findByAirlineId(int idAirline);
+    @Query("SELECT f FROM FlightEntity f WHERE f.airline.id = :idAirline")
+    List<FlightEntity> findByAirlineId(Long idAirline);
 }
