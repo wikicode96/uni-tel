@@ -13,7 +13,7 @@ public class CostumerEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     @Column(name = "first_name", nullable = false)
     private String firstName;
@@ -30,7 +30,7 @@ public class CostumerEntity implements Serializable {
     public CostumerEntity() {
     }
 
-    public CostumerEntity(Long id, String firstName, String lastName, String email, String password) {
+    public CostumerEntity(int id, String firstName, String lastName, String email, String password) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -51,11 +51,11 @@ public class CostumerEntity implements Serializable {
         return Objects.hash(id, firstName, lastName, email, password);
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

@@ -1,68 +1,58 @@
 package com.github.wikicode96.costumer.service;
 
+import com.github.wikicode96.costumer.command.CreateCostummerCommand;
+import com.github.wikicode96.costumer.command.DeleteCostummerCommand;
+import com.github.wikicode96.costumer.command.UpdateCostumerCommand;
+import com.github.wikicode96.costumer.dto.CostumerDTO;
 import com.github.wikicode96.costumer.entity.CostumerEntity;
 import com.github.wikicode96.costumer.repository.CostumerRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class CostumerServiceImpl implements CostumerService {
 
     @Autowired
-    private CostumerRepository repository;
+    ModelMapper mapper;
+
+    @Autowired
+    CostumerRepository repository;
 
     @Override
-    public CostumerEntity newUser(CostumerEntity user) {
+    public void createCostumer(CreateCostummerCommand costumer) {
+        CostumerEntity entity = mapper.map(costumer, CostumerEntity.class);
+        repository.save(entity);
+    }
 
-        if(user.getId() == 0){
-            try{
-                repository.save(user);
-                return user;
-            }catch (Exception e){
-                return null;
-            }
+    @Override
+    public CostumerDTO getCostumerById(int id) {
+        CostumerEntity entity = repository.getReferenceById(id);
+        return mapper.map(entity, CostumerDTO.class);
+    }
+
+    @Override
+    public List<CostumerDTO> getAllCostumers() {
+        List<CostumerEntity> entities = repository.findAll();
+        List<CostumerDTO> dtos = new ArrayList<>();
+
+        for(CostumerEntity entity: entities) {
+            dtos.add(mapper.map(entity, CostumerDTO.class));
         }
-        return null;
+        return dtos;
     }
 
     @Override
-    public CostumerEntity getUserById(int id) {
-        if(id > 0) return repository.findById(id).orElse(null);
-        else return null;
+    public void updateCostumer(UpdateCostumerCommand costumer) {
+        CostumerEntity entity = mapper.map(costumer, CostumerEntity.class);
+        repository.save(entity);
     }
 
     @Override
-    public List<CostumerEntity> getAllUsers() {
-        return repository.findAll();
-    }
-
-    @Override
-    public CostumerEntity updateUser(CostumerEntity user) {
-
-        if(user.getId() > 0) {
-            try{
-                repository.save(user);
-                return user;
-            }catch (Exception e){
-                return null;
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public CostumerEntity deleteUser(CostumerEntity user) {
-
-        if(user.getId() > 0) {
-            try{
-                repository.delete(user);
-                return user;
-            }catch (Exception e){
-                return null;
-            }
-        }
-        return null;
+    public void deleteCostumer(DeleteCostummerCommand costumer) {
+        repository.deleteById(costumer.getId());
     }
 }
