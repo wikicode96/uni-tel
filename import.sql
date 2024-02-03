@@ -6,7 +6,7 @@ USE uni_tel;
 
 -- Create the 'costumers' table
 CREATE TABLE IF NOT EXISTS costumers (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     first_name VARCHAR(255),
     last_name VARCHAR(255),
     email VARCHAR(255),
@@ -15,14 +15,14 @@ CREATE TABLE IF NOT EXISTS costumers (
 
 -- Create the 'airlines' table
 CREATE TABLE IF NOT EXISTS airlines (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(255),
     img_logo VARCHAR(255)
 );
 
 -- Create the 'flights' table
 CREATE TABLE IF NOT EXISTS flights (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     id_airline INT,
     destination VARCHAR(255),
     origin VARCHAR(255),
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS flights (
 
 -- Create the 'bookings' table
 CREATE TABLE IF NOT EXISTS bookings (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     id_flight INT,
     id_costumers INT,
     date DATE,
