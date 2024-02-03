@@ -8,7 +8,9 @@ import com.github.wikicode96.costumer.entity.CostumerEntity;
 import com.github.wikicode96.costumer.repository.CostumerRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,12 +49,23 @@ public class CostumerServiceImpl implements CostumerService {
 
     @Override
     public void updateCostumer(UpdateCostumerCommand costumer) {
-        CostumerEntity entity = mapper.map(costumer, CostumerEntity.class);
-        repository.save(entity);
+
+        if (costumer.getId() > 0) {
+            CostumerEntity entity = mapper.map(costumer, CostumerEntity.class);
+            repository.save(entity);
+        } else {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Customer ID is invalid");
+        }
     }
 
     @Override
     public void deleteCostumer(DeleteCostummerCommand costumer) {
-        repository.deleteById(costumer.getId());
+        CostumerEntity entity = repository.findByEmail(costumer.getEmail());
+
+        if (entity != null) {
+            repository.delete(entity);
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Customer not found with email: " + costumer.getEmail());
+        }
     }
 }

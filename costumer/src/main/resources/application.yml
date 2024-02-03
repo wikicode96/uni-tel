@@ -1,0 +1,31 @@
+# 50.000 - 65.000
+server:
+    port: 50002
+
+#H2
+spring:
+    datasource:
+        url: jdbc:h2:mem:testdb
+        driverClassName: org.h2.Driver
+        username: SA
+        password: ''
+    h2:
+        console:
+            enabled: true
+
+#MySQL
+#spring:
+#    datasource:
+#        url: jdbc:mysql://localhost:3306/uni_tel
+#        username: root
+#        password: 1234
+#        driver-class-name: com.mysql.cj.jdbc.Driver
+#    jpa:
+#        database-platform: org.hibernate.dialect.MySQLDialect
+
+# Log SQL Querys with Hibernate
+logging:
+    level:
+        org:
+            hibernate:
+                SQL: debug

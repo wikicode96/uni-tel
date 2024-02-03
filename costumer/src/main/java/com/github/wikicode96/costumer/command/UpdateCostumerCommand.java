@@ -8,6 +8,9 @@ public class UpdateCostumerCommand {
     private String newEmail;
     private String newPassword;
 
+    public UpdateCostumerCommand() {
+    }
+
     public UpdateCostumerCommand(int id, String newFirstName, String newLastName, String newEmail, String newPassword) {
         this.id = id;
         this.newFirstName = newFirstName;
