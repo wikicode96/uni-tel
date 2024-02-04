@@ -2,7 +2,6 @@ package com.github.wikicode96.airline.service;
 
 import com.github.wikicode96.airline.command.AirlineCommand;
 import com.github.wikicode96.airline.dto.AirlineDTO;
-import com.github.wikicode96.airline.entity.AirlineEntity;
 
 import java.util.List;
 
