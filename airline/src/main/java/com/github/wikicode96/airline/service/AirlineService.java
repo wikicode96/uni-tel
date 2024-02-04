@@ -1,5 +1,7 @@
 package com.github.wikicode96.airline.service;
 
+import com.github.wikicode96.airline.command.AirlineCommand;
+import com.github.wikicode96.airline.dto.AirlineDTO;
 import com.github.wikicode96.airline.entity.AirlineEntity;
 
 import java.util.List;
@@ -7,9 +9,9 @@ import java.util.List;
 public interface AirlineService {
 
     // CRUD
-    AirlineEntity newAirline(AirlineEntity airline);
-    AirlineEntity getAirlineById(int id);
-    List<AirlineEntity> getAllAirlines();
-    AirlineEntity updateAirline(AirlineEntity airline);
-    AirlineEntity deleteAirline(AirlineEntity airline);
+    void createAirline(AirlineCommand airline);
+    AirlineDTO getAirlineById(int id);
+    List<AirlineDTO> getAllAirlines();
+    void updateAirline(AirlineCommand airline);
+    void deleteAirlineByName(AirlineCommand airline);
 }

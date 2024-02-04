@@ -1,68 +1,69 @@
 package com.github.wikicode96.airline.service;
 
+import com.github.wikicode96.airline.command.AirlineCommand;
+import com.github.wikicode96.airline.dto.AirlineDTO;
 import com.github.wikicode96.airline.entity.AirlineEntity;
 import com.github.wikicode96.airline.repository.AirlineRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class AirlineServiceImpl implements AirlineService{
 
     @Autowired
+    private ModelMapper mapper;
+
+    @Autowired
     private AirlineRepository repository;
 
     @Override
-    public AirlineEntity newAirline(AirlineEntity airline) {
+    public void createAirline(AirlineCommand airline) {
+        AirlineEntity entity = mapper.map(airline, AirlineEntity.class);
+        repository.save(entity);
+    }
 
-        if(airline.getId() == 0){
-            try{
-                repository.save(airline);
-                return airline;
-            }catch (Exception e){
-                return null;
-            }
+    @Override
+    public AirlineDTO getAirlineById(int id) {
+        AirlineEntity entity = repository.getReferenceById(id);
+        return mapper.map(entity, AirlineDTO.class);
+    }
+
+    @Override
+    public List<AirlineDTO> getAllAirlines() {
+        List<AirlineEntity> entities = repository.findAll();
+        List<AirlineDTO> dtos = new ArrayList<>();
+
+        for(AirlineEntity entity: entities) {
+            dtos.add(mapper.map(entity, AirlineDTO.class));
         }
-        return null;
+        return dtos;
     }
 
     @Override
-    public AirlineEntity getAirlineById(int id) {
-        if(id > 0) return repository.findById(id).orElse(null);
-        else return null;
-    }
+    public void updateAirline(AirlineCommand airline) {
 
-    @Override
-    public List<AirlineEntity> getAllAirlines() {
-        return repository.findAll();
-    }
-
-    @Override
-    public AirlineEntity updateAirline(AirlineEntity airline) {
-
-        if(airline.getId() > 0) {
-            try{
-                repository.save(airline);
-                return airline;
-            }catch (Exception e){
-                return null;
-            }
+        if (airline.getId() > 0) {
+            AirlineEntity entity = mapper.map(airline, AirlineEntity.class);
+            repository.save(entity);
+        } else {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Airline ID is invalid");
         }
-        return null;
     }
 
     @Override
-    public AirlineEntity deleteAirline(AirlineEntity airline) {
+    public void deleteAirlineByName(AirlineCommand airline) {
+        AirlineEntity entity = repository.findByName(airline.getName());
 
-        if(airline.getId() > 0) {
-            try{
-                repository.delete(airline);
-                return airline;
-            }catch (Exception e){
-                return null;
-            }
+        if (entity != null) {
+            repository.delete(entity);
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Airline not found with name: " + airline.getName());
         }
-        return null;
     }
 }

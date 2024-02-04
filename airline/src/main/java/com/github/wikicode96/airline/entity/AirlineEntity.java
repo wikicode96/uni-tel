@@ -13,18 +13,18 @@ public class AirlineEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false, unique = true)
     private String name;
 
-    @Column(name = "img_logo")
+    @Column(name = "img_logo", nullable = false, unique = true)
     private String imgLogo;
 
     public AirlineEntity() {
     }
 
-    public AirlineEntity(Long id, String name, String imgLogo) {
+    public AirlineEntity(int id, String name, String imgLogo) {
         this.id = id;
         this.name = name;
         this.imgLogo = imgLogo;
@@ -43,11 +43,11 @@ public class AirlineEntity implements Serializable {
         return Objects.hash(id, name, imgLogo);
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
