@@ -15,5 +15,5 @@ public interface CostumerService {
     CostumerDTO getCostumerById(int id);
     List<CostumerDTO> getAllCostumers();
     void updateCostumer(UpdateCostumerCommand costumer);
-    void deleteCostumer(DeleteCostummerCommand costumer);
+    void deleteCostumerByEmail(DeleteCostummerCommand costumer);
 }

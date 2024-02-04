@@ -9,15 +9,15 @@ CREATE TABLE IF NOT EXISTS costumers (
     id INT PRIMARY KEY AUTO_INCREMENT,
     first_name VARCHAR(255),
     last_name VARCHAR(255),
-    email VARCHAR(255),
+    email VARCHAR(255) UNIQUE,
     password VARCHAR(255)
 );
 
 -- Create the 'airlines' table
 CREATE TABLE IF NOT EXISTS airlines (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(255),
-    img_logo VARCHAR(255)
+    name VARCHAR(255) UNIQUE,
+    img_logo VARCHAR(255) UNIQUE
 );
 
 -- Create the 'flights' table

@@ -19,10 +19,10 @@ import java.util.List;
 public class CostumerServiceImpl implements CostumerService {
 
     @Autowired
-    ModelMapper mapper;
+    private ModelMapper mapper;
 
     @Autowired
-    CostumerRepository repository;
+    private CostumerRepository repository;
 
     @Override
     public void createCostumer(CreateCostummerCommand costumer) {
@@ -59,7 +59,7 @@ public class CostumerServiceImpl implements CostumerService {
     }
 
     @Override
-    public void deleteCostumer(DeleteCostummerCommand costumer) {
+    public void deleteCostumerByEmail(DeleteCostummerCommand costumer) {
         CostumerEntity entity = repository.findByEmail(costumer.getEmail());
 
         if (entity != null) {

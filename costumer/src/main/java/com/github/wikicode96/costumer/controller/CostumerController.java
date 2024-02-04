@@ -45,8 +45,8 @@ public class CostumerController {
     }
 
     @DeleteMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<String> deleteCostumer(@RequestBody DeleteCostummerCommand costumer){
-        service.deleteCostumer(costumer);
+    ResponseEntity<String> deleteCostumerByEmail(@RequestBody DeleteCostummerCommand costumer){
+        service.deleteCostumerByEmail(costumer);
         return ResponseEntity.ok("Costumer deleted successfully");
     }
 }
