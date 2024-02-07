@@ -1,14 +1,15 @@
 package com.github.wikicode96.flight.service;
 
-import com.github.wikicode96.flight.entity.FlightEntity;
+import com.github.wikicode96.flight.command.FlightCommand;
+import com.github.wikicode96.flight.dto.FlightDTO;
 
 import java.util.List;
 
 public interface FlightService {
-    FlightEntity newFlight(FlightEntity flight);
-    FlightEntity getFlightById(int id);
-    List<FlightEntity> getAllFlights();
-    List<FlightEntity> getAllFlightsByAirlineId(Long idAirline);
-    FlightEntity updateFlight(FlightEntity flight);
-    FlightEntity deleteFlight(FlightEntity flight);
+    void createFlight(FlightCommand flight);
+    FlightDTO getFlightById(int id);
+    List<FlightDTO> getAllFlights();
+    List<FlightDTO> getAllFlightsByAirline(String airline);
+    void updateFlightById(FlightCommand flight);
+    void deleteFlightById(FlightCommand flight);
 }

@@ -1,9 +1,9 @@
 package com.github.wikicode96.flight.controller;
 
-import com.github.wikicode96.flight.entity.FlightEntity;
+import com.github.wikicode96.flight.command.FlightCommand;
+import com.github.wikicode96.flight.dto.FlightDTO;
 import com.github.wikicode96.flight.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,56 +11,45 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping(value = "flight")
 public class FlightController {
 
     @Autowired
     private FlightService service;
 
-    @PostMapping(value = "flight", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<FlightEntity> newFlight(@RequestBody FlightEntity flight){
-        FlightEntity response = service.newFlight(flight);
-
-        if (response != null) return ResponseEntity.ok(response);
-        else return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<String> createFlight(@RequestBody FlightCommand flight){
+        service.createFlight(flight);
+        return ResponseEntity.ok("Flight created successfully");
     }
 
-    @GetMapping(value = "flight/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<FlightEntity> getFlightById(@PathVariable("id") int id){
-        FlightEntity response = service.getFlightById(id);
-
-        if (response != null) return ResponseEntity.ok(response);
-        else return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+    @GetMapping(params = "id", produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<FlightDTO> getFlightById(@RequestParam("id") int id){
+        FlightDTO response = service.getFlightById(id);
+        return ResponseEntity.ok(response);
     }
 
-    @GetMapping(value = "flights", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<List<FlightEntity>> getAllFlights(){
-        List<FlightEntity> response = service.getAllFlights();
-
-        if (!response.isEmpty()) return ResponseEntity.ok(response);
-        else return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<List<FlightDTO>> getAllFlights(){
+        List<FlightDTO> response = service.getAllFlights();
+        return ResponseEntity.ok(response);
     }
 
-    @GetMapping(value = "flights/airline/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<List<FlightEntity>> getAllFlightsByAirlineId(@PathVariable("id") Long idAirline){
-        List<FlightEntity> response = service.getAllFlightsByAirlineId(idAirline);
-
-        if (!response.isEmpty()) return ResponseEntity.ok(response);
-        else return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+    @GetMapping(params = "airline", produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<List<FlightDTO>> getAllFlightsByAirline(@RequestParam("airline") String airline){
+        List<FlightDTO> response = service.getAllFlightsByAirline(airline);
+        return ResponseEntity.ok(response);
     }
 
-    @PutMapping(value = "flight", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<FlightEntity> updateFlight(@RequestBody FlightEntity flight){
-        FlightEntity response =  service.updateFlight(flight);
-
-        if (response != null) return ResponseEntity.ok(response);
-        else return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<String> updateFlight(@RequestBody FlightCommand flight){
+        service.updateFlightById(flight);
+        return ResponseEntity.ok("Flight updated successfully");
     }
 
-    @DeleteMapping(value = "flight", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<FlightEntity> deleteFlight(@RequestBody FlightEntity flight){
-        FlightEntity response =  service.deleteFlight(flight);
-
-        if (response != null) return ResponseEntity.ok(response);
-        else return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+    @DeleteMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<String> deleteFlight(@RequestBody FlightCommand flight){
+        service.deleteFlightById(flight);
+        return ResponseEntity.ok("Flight deleted successfully");
     }
 }
