@@ -29,8 +29,8 @@ public class AirlineServiceImpl implements AirlineService{
     }
 
     @Override
-    public AirlineDTO getAirlineById(int id) {
-        AirlineEntity entity = repository.getReferenceById(id);
+    public AirlineDTO getAirlineByName(String name) {
+        AirlineEntity entity = repository.findByName(name);
         return mapper.map(entity, AirlineDTO.class);
     }
 

@@ -24,9 +24,9 @@ public class AirlineController {
         return ResponseEntity.ok("Airline created successfully");
     }
 
-    @GetMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<AirlineDTO> getAirlineById(@PathVariable("id") int id){
-        AirlineDTO response = service.getAirlineById(id);
+    @GetMapping(value = "{name}", produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<AirlineDTO> getAirlineByName(@PathVariable("name") String name){
+        AirlineDTO response = service.getAirlineByName(name);
         return ResponseEntity.ok(response);
     }
 
@@ -36,13 +36,13 @@ public class AirlineController {
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<String> updateAirline(@RequestBody AirlineCommand airline){
         service.updateAirline(airline);
         return ResponseEntity.ok("Airline updated successfully");
     }
 
-    @DeleteMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<String> deleteAirlineByName(@RequestBody AirlineCommand airline){
         service.deleteAirlineByName(airline);
         return ResponseEntity.ok("Airline deleted successfully");

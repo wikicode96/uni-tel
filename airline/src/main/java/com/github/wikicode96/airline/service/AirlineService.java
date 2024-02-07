@@ -9,7 +9,7 @@ public interface AirlineService {
 
     // CRUD
     void createAirline(AirlineCommand airline);
-    AirlineDTO getAirlineById(int id);
+    AirlineDTO getAirlineByName(String name);
     List<AirlineDTO> getAllAirlines();
     void updateAirline(AirlineCommand airline);
     void deleteAirlineByName(AirlineCommand airline);
