@@ -7,6 +7,8 @@ import com.github.wikicode96.flight.entity.AirlineEntity;
 import com.github.wikicode96.flight.entity.FlightEntity;
 import com.github.wikicode96.flight.repository.FlightRepository;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -28,6 +30,8 @@ public class FlightServiceImpl implements FlightService{
 
     @Autowired
     private FlightRepository repository;
+
+    private final Logger LOGGER = LoggerFactory.getLogger(FlightServiceImpl.class);
 
     private final String urlAirline = "http://localhost:50000/airline/";
 
@@ -69,20 +73,32 @@ public class FlightServiceImpl implements FlightService{
 
     @Override
     public List<FlightDTO> getAllFlightsByAirline(String airline) {
-        // TODO: Programar
-        return null;
+
+        List<FlightEntity> entities = repository.findAllByAirlineName(airline);
+        List<FlightDTO> dtos = new ArrayList<>();
+
+        for (FlightEntity entity: entities){
+            dtos.add(mapper.map(entity, FlightDTO.class));
+        }
+        return dtos;
     }
 
     @Override
     public void updateFlightById(FlightCommand flight) {
 
         if (flight.getId() > 0) {
-            FlightEntity entity = mapper.map(flight, FlightEntity.class);
-            repository.save(entity);
+            try {
+                FlightEntity entity = repository.getReferenceById(flight.getId());
+                entity.setDepart(flight.getDepart());
+                entity.setDestination(flight.getDestination());
+                entity.setOrigin(flight.getOrigin());
+                repository.save(entity);
+            } catch (Exception e) {
+                LOGGER.error(e.getMessage());
+            }
         } else {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Flight ID is invalid");
         }
-        // TODO: Traer Airline primero
     }
 
     @Override
