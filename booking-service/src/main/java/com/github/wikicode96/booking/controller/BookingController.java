@@ -1,9 +1,9 @@
 package com.github.wikicode96.booking.controller;
 
-import com.github.wikicode96.booking.entity.BookingEntity;
+import com.github.wikicode96.booking.command.BookingCommand;
+import com.github.wikicode96.booking.dto.BookingDTO;
 import com.github.wikicode96.booking.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,56 +11,45 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping(value = "booking")
 public class BookingController {
 
     @Autowired
     private BookingService service;
 
-    @PostMapping(value = "booking", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<BookingEntity> newBooking(@RequestBody BookingEntity booking){
-        BookingEntity response = service.newBooking(booking);
-
-        if (response != null) return ResponseEntity.ok(response);
-        else return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<String> createBooking(@RequestBody BookingCommand booking){
+        service.createBooking(booking);
+        return ResponseEntity.ok("Booking created successfully");
     }
 
-    @GetMapping(value = "booking/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<BookingEntity> getBookingById(@PathVariable("id") int id){
-        BookingEntity response = service.getBookingById(id);
-
-        if (response != null) return ResponseEntity.ok(response);
-        else return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+    @GetMapping(value = "id", produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<BookingDTO> getBookingById(@PathVariable("id") int id){
+        BookingDTO response = service.getBookingById(id);
+        return ResponseEntity.ok(response);
     }
 
-    @GetMapping(value = "bookings", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<List<BookingEntity>> getAllBookings(){
-        List<BookingEntity> response = service.getAllBookings();
-
-        if (!response.isEmpty()) return ResponseEntity.ok(response);
-        else return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<List<BookingDTO>> getAllBookings(){
+        List<BookingDTO> response = service.getAllBookings();
+        return ResponseEntity.ok(response);
     }
 
-    @GetMapping(value = "bookings/user/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<List<BookingEntity>> getAllBookingsByUserId(@PathVariable("id") Long idUser){
-        List<BookingEntity> response = service.getAllBookingsByUserId(idUser);
-
-        if (!response.isEmpty()) return ResponseEntity.ok(response);
-        else return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+    @GetMapping(value = "user/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<List<BookingDTO>> getAllBookingsByUserId(@PathVariable("id") int userId){
+        List<BookingDTO> response = service.getAllBookingsByUserId(userId);
+        return ResponseEntity.ok(response);
     }
 
-    @PutMapping(value = "booking", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<BookingEntity> updateBooking(@RequestBody BookingEntity booking){
-        BookingEntity response = service.updateBooking(booking);
-
-        if (response != null) return ResponseEntity.ok(response);
-        else return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<String> updateBooking(@RequestBody BookingCommand booking){
+        service.updateBooking(booking);
+        return ResponseEntity.ok("Booking updated successfully");
     }
 
-    @DeleteMapping(value = "booking", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<BookingEntity> deleteBooking(@RequestBody BookingEntity booking){
-        BookingEntity response = service.deleteBooking(booking);
-
-        if (response != null) return ResponseEntity.ok(response);
-        else return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+    @DeleteMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<String> deleteBooking(@RequestBody BookingCommand booking){
+        service.deleteBooking(booking);
+        return ResponseEntity.ok("Booking deleted successfully");
     }
 }
