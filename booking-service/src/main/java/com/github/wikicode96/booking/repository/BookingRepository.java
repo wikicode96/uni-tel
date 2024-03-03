@@ -12,5 +12,5 @@ public interface BookingRepository extends JpaRepository<BookingEntity, Integer>
 
     // Custom method to get bookings by user id
     @Query("SELECT b FROM BookingEntity b WHERE b.costumer.id = :idUser")
-    List<BookingEntity> findByUserId(Long idUser);
+    List<BookingEntity> findByUserId(int idUser);
 }

@@ -23,8 +23,8 @@ public class BookingController {
         return ResponseEntity.ok("Booking created successfully");
     }
 
-    @GetMapping(value = "id", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<BookingDTO> getBookingById(@PathVariable("id") int id){
+    @GetMapping(params = "id", produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<BookingDTO> getBookingById(@RequestParam("id") int id){
         BookingDTO response = service.getBookingById(id);
         return ResponseEntity.ok(response);
     }
@@ -35,8 +35,8 @@ public class BookingController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping(value = "user/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<List<BookingDTO>> getAllBookingsByUserId(@PathVariable("id") int userId){
+    @GetMapping(params = "userId", produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<List<BookingDTO>> getAllBookingsByUserId(@RequestParam("userId") int userId){
         List<BookingDTO> response = service.getAllBookingsByUserId(userId);
         return ResponseEntity.ok(response);
     }

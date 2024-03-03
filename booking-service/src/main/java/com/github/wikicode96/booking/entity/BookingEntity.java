@@ -20,7 +20,7 @@ public class BookingEntity implements Serializable {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "id_costumers", nullable = false)
+    @JoinColumn(name = "id_customers", nullable = false)
     private CustomerEntity costumer;
 
     @ManyToOne
