@@ -1,6 +1,6 @@
 # 50.000 - 65.000
 server:
-    port: 50002
+    port: 50003
 
 #H2
 #spring:
@@ -29,3 +29,11 @@ logging:
         org:
             hibernate:
                 SQL: debug
+
+# api-docs - swagger-ui
+springdoc:
+    api-docs:
+        enable: true
+    swagger-ui:
+        enable: true
+        path: /doc/swagger-ui.html

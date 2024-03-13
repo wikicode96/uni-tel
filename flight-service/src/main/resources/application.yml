@@ -29,3 +29,11 @@ logging:
         org:
             hibernate:
                 SQL: debug
+
+# api-docs - swagger-ui
+springdoc:
+    api-docs:
+        enable: true
+    swagger-ui:
+        enable: true
+        path: /doc/swagger-ui.html
